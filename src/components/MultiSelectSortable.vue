@@ -1,7 +1,7 @@
 <template>
   <div>
     <div :class="{selected: item.isSelected}" draggable="true" @dragstart="dragstart(item, $event)" @dragend="dragend" @dragenter="dragenter(item, $event)" @click="select(item)" v-for="item in items" :key="item.index">
-      <slot name="item" :title="item.title" :index="item.index">
+      <slot name="item" :title="item.title" :id="item.id">
       </slot>
     </div>
   </div>
@@ -68,17 +68,17 @@ export default {
 
       if (event.pageY < this.beforeY) {
         item.index += Object.keys(this.selectedItems).length;
-        this.$emit('drag-end', this.orderedItems);
+        this.$emit('drag-move', this.orderedItems);
         for (let key in this.selectedItems) {
           this.selectedItems[key].index -= 1;
-          this.$emit('drag-end', this.orderedItems);
+          this.$emit('drag-move', this.orderedItems);
         }
       } else {
         item.index -= Object.keys(this.selectedItems).length;
-        this.$emit('drag-end', this.orderedItems);
+        this.$emit('drag-move', this.orderedItems);
         for (let key in this.selectedItems) {
           this.selectedItems[key].index += 1;
-          this.$emit('drag-end', this.orderedItems);
+          this.$emit('drag-move', this.orderedItems);
         }
       }
 
@@ -92,8 +92,9 @@ export default {
     }
   },
   created: function () {
-    for (var key in this.items) {
+    for (let key in this.items) {
       this.$set(this.items[key], 'isSelected', false);
+      this.$set(this.items[key], 'index', Number(key));
     }
   }
 };

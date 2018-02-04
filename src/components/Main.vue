@@ -1,8 +1,8 @@
 <template>
   <div class="aaa">
-    <multi-select-sortable :items="items" @drag-end="dragEnd">
+    <multi-select-sortable :items="items" @drag-move="dragMove">
       <div slot="item" slot-scope="props">
-        {{props.title}}
+        {{ ' 【' + props.id + '】' +  props.title }}
       </div>
     </multi-select-sortable>
   </div>
@@ -17,29 +17,28 @@ export default {
   },
   data: function () {
     return {
-      items: {
-        0: {
-          title: 'おはようございます',
-          index: 0
+      items: [
+        {
+          id: 53,
+          title: 'おはようございます'
         },
-        1: {
-          title: 'こんにちは',
-          index: 1
+        {
+          id: 32,
+          title: 'こんにちは'
         },
-        2: {
-          title: 'おつかれさまです',
-          index: 2
+        {
+          id: 41,
+          title: 'おつかれさまです'
         },
-        3: {
-          title: 'こんばんは',
-          index: 3,
-          isSelected: false
+        {
+          id: 29,
+          title: 'こんばんは'
         }
-      }
+      ]
     };
   },
   methods: {
-    dragEnd: function (items) {
+    dragMove: function (items) {
       this.items = items;
     }
   }
