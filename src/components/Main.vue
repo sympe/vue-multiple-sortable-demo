@@ -1,6 +1,6 @@
 <template>
   <div class="aaa">
-    <multi-select-sortable :items="items" @drag-move="dragMove">
+    <multi-select-sortable :items="items" @drag="drag">
       <div slot="item" slot-scope="props">
         {{ ' 【' + props.id + '】' +  props.title }}
       </div>
@@ -20,25 +20,25 @@ export default {
       items: [
         {
           id: 53,
-          title: 'おはようございます'
+          title: 'Michael'
         },
         {
           id: 32,
-          title: 'こんにちは'
+          title: 'John'
         },
         {
           id: 41,
-          title: 'おつかれさまです'
+          title: 'Daniel'
         },
         {
           id: 29,
-          title: 'こんばんは'
+          title: 'Andrew'
         }
       ]
     };
   },
   methods: {
-    dragMove: function (items) {
+    drag: function (items) {
       this.items = items;
     }
   }

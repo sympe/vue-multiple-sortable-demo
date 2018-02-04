@@ -1,22 +1,15 @@
-<template>
-  <div>
-    <div :class="{selected: item.isSelected}" draggable="true" @dragstart="dragstart(item, $event)" @dragend="dragend" @dragenter="dragenter(item, $event)" @click="select(item)" v-for="item in items" :key="item.index">
-      <slot name="item" :title='item.title' :id='item.id' :keyword='item.keyword' :description='item.description'></slot>
-    </div>
-  </div>
-</template>
-
-<script>
+import Vue from 'vue';
 import _ from 'lodash';
 
-export default {
-  name: 'multi-select-sortable',
+Vue.component('my-component', {
   props: ['items'],
+  template: `<div :class="{selected: item.isSelected}" draggable="true" @dragstart="dragstart(item, $event)" @dragend="dragend" @dragenter="dragenter(item, $event)" @click="select(item)" v-for="item in items" :key="item.index">
+  <slot name="item" :names='item.name' :id='item.id'>
+  </slot>`,
   data: function () {
     return {
       selectedItems: {},
-      beforeY: 0,
-      slotText: ":names='item.name' :id='item.id'"
+      beforeY: 0
     };
   },
   computed: {
@@ -68,17 +61,17 @@ export default {
 
       if (event.pageY < this.beforeY) {
         item.index += Object.keys(this.selectedItems).length;
-        this.$emit('drag', this.orderedItems);
+        this.$emit('drag-move', this.orderedItems);
         for (let key in this.selectedItems) {
           this.selectedItems[key].index -= 1;
-          this.$emit('drag', this.orderedItems);
+          this.$emit('drag-move', this.orderedItems);
         }
       } else {
         item.index -= Object.keys(this.selectedItems).length;
-        this.$emit('drag', this.orderedItems);
+        this.$emit('drag-move', this.orderedItems);
         for (let key in this.selectedItems) {
           this.selectedItems[key].index += 1;
-          this.$emit('drag', this.orderedItems);
+          this.$emit('drag-move', this.orderedItems);
         }
       }
 
@@ -97,11 +90,4 @@ export default {
       this.$set(this.items[key], 'index', Number(key));
     }
   }
-};
-</script>
-
-<style>
-.selected {
-  border: medium solid #4F99C6;
-}
-</style>
+});
