@@ -1,6 +1,10 @@
 <template>
   <div class="aaa">
-      <multi-select-sortable :items="items" @drag-end="dragEnd"></multi-select-sortable>
+    <multi-select-sortable :items="items" @drag-end="dragEnd">
+      <div slot="item" slot-scope="props">
+        {{props.title}}
+      </div>
+    </multi-select-sortable>
   </div>
 </template>
 
@@ -15,26 +19,19 @@ export default {
     return {
       items: {
         0: {
-          title: '1',
-          text: '1',
-          index: 0,
-          isSelected: false
+          title: 'おはようございます',
+          index: 0
         },
         1: {
-          title: '2',
-          text: '2',
-          index: 1,
-          isSelected: false
+          title: 'こんにちは',
+          index: 1
         },
         2: {
-          title: '3',
-          text: '3',
-          index: 2,
-          isSelected: false
+          title: 'おつかれさまです',
+          index: 2
         },
         3: {
-          title: '4',
-          text: '4',
+          title: 'こんばんは',
           index: 3,
           isSelected: false
         }
