@@ -1,0 +1,1 @@
+{"version":3,"sources":["app.cfd63a23e95622d42243be4dbeb49ac1.css"],"names":[],"mappings":"AACA,UACE,2BAA6B,CAC9B","file":"app.cfd63a23e95622d42243be4dbeb49ac1.css","sourcesContent":["\n.selected {\n  border: medium solid #4F99C6;\n}\n"]}
